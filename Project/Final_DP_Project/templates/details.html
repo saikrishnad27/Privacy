@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Privacy Quiz</title>
+	<style>
+		.hidden {
+			display: none;
+		}
+        body{
+        background-image: url('http://www.dockeodental.com/wp-content/uploads/2020/04/question-mark-background-1024x512.jpg'); 
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        }
+	</style>
+</head>
+<body>
+{% if questions %}
+    <h1>PRIVACY POLICY AWARENESS QUIZ</h1>
+    <form onsubmit="return submitAnswers()">
+        <div>
+            <b><p style="font-size:20px;">{{ questions[0] }}</p></b>
+            {% for option in options[0] %}
+            <input type="radio" name="q0" value="{{ option }}" required>
+            <label style="font-size:18px;">{{ option }}</label><br>
+            {% endfor %}
+            <b><p style="font-size:20px;" id="answer1" class="hidden">Correct Answer is :{{ correct_answers[0]+1 }}</p></b>
+            <b><p style="font-size:20px;" id="evidence1" class="hidden">{{ evidence[0] }}</p></b>
+            
+        </div>
+        <br>
+        <div>
+            <b><p style="font-size:20px;">{{ questions[1] }}</p></b>
+            {% for option in options[1] %}
+            <input type="radio" name="q1" value="{{ option }}" required>
+            <label style="font-size:18px;">{{ option }}</label><br>
+            {% endfor %}
+            <b><p style="font-size:20px;" id="answer2" class="hidden">Correct Answer is :{{ correct_answers[1]+1 }}</p></b>
+            <b><p style="font-size:20px;" id="evidence2" class="hidden">{{ evidence[1] }}</p></b>
+        </div>
+        <br>
+        <div>
+            <b><p style="font-size:20px;">{{ questions[2] }}</p></b>
+            {% for option in options[2] %}
+            <input type="radio" name="q2" value="{{ option }}" required>
+            <label style="font-size:18px;">{{ option }}</label><br>
+            {% endfor %}
+            <b><p style="font-size:20px;" id="answer3" class="hidden">Correct Answer is :{{ correct_answers[2]+1 }}</p></b>
+            <b><p style="font-size:20px;" id="evidence3" class="hidden">{{ evidence[2] }}</p></b>
+        </div>
+        <br>
+		<div>
+           <b><p style="font-size:20px;">{{ questions[3] }}</p></b>
+            {% for option in options[3] %}
+            <input type="radio" name="q3" value="{{ option }}" required >
+            <label style="font-size:18px;">{{ option }}</label><br>
+            {% endfor %}
+            <b><p style="font-size:20px;" id="answer4" class="hidden">Correct Answer is :{{ correct_answers[3]+1 }}</p></b>
+            <b><p style="font-size:20px;" id="evidence4" class="hidden">{{ evidence[3] }}</p></b>
+        </div>
+        <br>
+		<div>
+            <b><p style="font-size:20px;">{{ questions[4] }}</p></b>
+            {% for option in options[4] %}
+            <input type="radio" name="q4" value="{{ option }}"  required>
+            <label style="font-size:18px;">{{ option }}</label><br>
+            {% endfor %}
+            <b><p style="font-size:20px;" id="answer5" class="hidden">Correct Answer is :{{ correct_answers[4]+1 }}</p></b>
+            <b><p style="font-size:20px;" id="evidence5" class="hidden">{{ evidence[4] }}</p></b>
+        </div>
+        <br>
+        <button type="submit">Submit Answers</button>
+    </form>
+{% endif %}
+<b><p style="font-size:30px;" id="score">You Scored: 0</p></b>
+<!-- <div id="answers1" class="hidden">
+	<h2>Correct answers</h2>
+	<ol>
+	{% for item in correct_answers %}
+		<li>{{ item+1}}</li>
+	{% endfor %}
+	</ol>
+</div> -->
+
+<div id="answers12" class="hidden">
+	<h2>Correct answers</h2>
+	<h6 name="a1" value="{{correct_answers[0]}}"></h6>
+	<h6 name="a2" value="{{correct_answers[1]}}"></h6>
+	<h6 name="a3" value="{{correct_answers[2]}}"></h6>
+	<h6 name="a4" value="{{correct_answers[3]}}"></h6>
+	<h6 name="a5" value="{{correct_answers[4]}}"></h6>
+</div>
+<div id="evidence" class="hidden">
+	<h2>Evidence</h2>
+	{% for item in evidence %}
+		<p>{{ item }}</p>
+	{% endfor %}
+</div>
+
+<script>
+	var score = 0;
+	function submitAnswers() {
+	  var count = 0;
+	  b=["q0","q1","q2","q3","q4"]
+	  document.querySelector('#answer1').classList.remove('hidden');
+      document.querySelector('#answer2').classList.remove('hidden');
+      document.querySelector('#answer3').classList.remove('hidden');
+      document.querySelector('#answer4').classList.remove('hidden');
+      document.querySelector('#answer5').classList.remove('hidden');
+      document.querySelector('#evidence1').classList.remove('hidden');
+      document.querySelector('#evidence2').classList.remove('hidden');
+      document.querySelector('#evidence3').classList.remove('hidden');
+      document.querySelector('#evidence4').classList.remove('hidden');
+	  document.querySelector('#evidence5').classList.remove('hidden');
+	  var correctAnswers = document.querySelectorAll('#answers12 h6');
+	  for (var i = 0; i < correctAnswers.length; i++) {
+		var radios = document.getElementsByName(b[i]);
+		var selectedValue;
+		for (var j = 0; j < radios.length; j++) {
+            if (radios[j].checked) {
+                selectedValue = j;
+                break;
+            }
+        }
+		console.log(selectedValue)
+		console.log(correctAnswers[i].getAttribute('value'))
+		if (selectedValue == correctAnswers[i].getAttribute('value')) {
+		  count++;
+		}
+	  }
+	  score = count;
+	  var scoreElement = document.getElementById("score");
+	  scoreElement.innerHTML = "Score: " + score;
+	  return false;
+	}
+  </script>
+  
+</body>
+</html>
