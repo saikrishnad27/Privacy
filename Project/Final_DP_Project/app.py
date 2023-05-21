@@ -51,7 +51,7 @@ from gensim import corpora, models
 
 
 app = Flask(__name__)
-openai.api_key = "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"
+openai.api_key = "Put your key here"
 nlp = spacy.load("en_core_web_sm", disable=['parser', 'ner'])
 
 
